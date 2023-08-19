@@ -34,6 +34,8 @@ body {
   border-radius: 10px;
   /* box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #f1f1f1; */
   display: flex;
+  height: 350px;
+  width: 1100px;
 }
 .movie-card:not(:first-child) {
   margin-top: 20px;
@@ -43,10 +45,12 @@ body {
 }
 .movie-card .left {
   flex: 1;
-  padding: 5px
+  padding: 15px;
+  margin-top:initial;
 }
 .movie-card .left img {
   height: 250px;
+  width: 450px;
   
 }
 .movie-card .right {
@@ -129,6 +133,14 @@ footer.starCount {
       margin: 5px;
     
 }
+.remove-btn{
+  
+  background-color: #db2828;
+  color: #fff;
+  text-shadow: none;
+  margin: 5px;
+}
+
 .unfavourite-btn {
   background-color: #db2828;
   color: #fff;

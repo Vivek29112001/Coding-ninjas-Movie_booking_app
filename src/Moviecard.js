@@ -1,76 +1,15 @@
 import { Component } from "react";
 
 class MovieCard extends Component {
-    constructor() {
-        super();
-        this.state = {
-            title: 'The Avenger..',
-            plot: "Supernatural power shown in the movie",
-            price: 199,
-            rating: 8.9,
-            stars: 0,
-        }
-        // this.addStars = this.addStars.bind(this);
-    };
-
-
-    // eventhandler of increase button
-    addStars = () => {
-
-        // Form1 of set state
-        if(this.state.stars >=5){
-            return;
-        }
-            this.setState({
-                stars : this.state.stars +0.5 
-           } );
-
-
-        // Form2 of set state
-        // this.setState((prevState) => {
-
-        //         return {
-        //             stars: prevState.stars + 0.5
-        //         };
-             
-        // });
-
-
-        // this.state.stars += 0.5;
-        // console.log('this.state.stars', this.state.stars);
-
-
-    }
-
-
-    subStars = () => {
-        // Form1 of set state
-        if (this.state.stars <= 0) {
-            return;
-        }
-        this.setState({
-            stars: this.state.stars - 0.5
-        });
-
-        // this.setState((prevState) => {
-        //     if (prevState.stars > 0) {
-        //       return {
-        //         stars: prevState.stars - 0.5
-        //       };
-        //     }
-        //     return null; // Don't update if limit is reached
-        //   });
-    }
-
-
-
     render() {
-        const { title, plot, price, rating, stars } = this.state;
+        const { title, plot,poster, price, rating, stars , fav , isIncard } = this.props.movies;
+        const { movies, addStars, subStars ,Favourite , AddToCard  } = this.props;
+        
         return (
             <div className="main">
                 <div className="movie-card">
                     <div className="left">
-                        <img alt="Poster" src="https://images5.alphacoders.com/481/481123.jpg" />
+                        <img alt="Poster" src={poster} />
                     </div>
                     <div className="right">
                         {/* <div className="title">{this.state.title}</div>
@@ -87,7 +26,7 @@ class MovieCard extends Component {
                                 <img
                                     className="str-btn" alt="decrease"
                                     src="https://cdn-icons-png.flaticon.com/128/43/43625.png"
-                                    onClick={this.subStars}
+                                    onClick={() => {this.props.subStars(this.props.movies)}}
                                 />
 
                                 <img
@@ -99,14 +38,27 @@ class MovieCard extends Component {
                                     className="str-btn" alt="increase"
                                     src="https://cdn-icons-png.flaticon.com/128/1237/1237946.png"
                                     // onClick={this.addStars.bind(this)}
-                                    onClick={this.addStars}
+                                    onClick={() => {this.props.addStars(this.props.movies)}}
                                 />
 
                                 <span className="starCount">{stars}</span>
 
                             </div>
-                            <button className="favorite-btn">Favourite</button>
-                            <button className="cart-btn">Add to card</button>
+                            
+                            {/* method 1 to convert fav to un-fav or viseversa */}
+                            {/* {fav? <button className="unfavourite-btn" onClick={this.handleFav}>Un-Favourite</button> 
+                            : <button className="favourite-btn" onClick={this.handleFav}>Favourite</button>} */}
+                            
+                            {/* Method 2 */}
+                            <button className={fav?"unfavourite-btn":"favourite-btn"} 
+                            onClick={() => this.props.Fav(this.props.movies)}>{fav?"UnFavourite":"Favourite"}</button> 
+
+                            <button className={ isIncard?"remove-btn":"cart-btn" }
+                            onClick={() => this.props.AddToCard(this.props.movies)}>{ isIncard?"Remove-from-card":"Add-to-card"}</button>
+
+                            {/* {card? <button className="remove-btn" onClick={this.handleCard}>Remove-from-card</button>
+                            :<button className="cart-btn" onClick={this.handleCard}>Add-To-Card</button>} */}
+
                         </div>
                     </div>
                 </div>
